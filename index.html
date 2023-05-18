@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Link à mes CSS-->
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/stylesDeBase.css" />
+    <link rel="stylesheet" href="css/stylesDuQuiz.css" />
+
+    <!-- POLICE FONT AWESOME POUR MON BEHANCE-->
+    <script
+      src="https://kit.fontawesome.com/f4dd89e5b2.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <!-- LE BODY COMMENCE ICI-->
+  <body>
+    <!-- LE MAIN DE L'ACCUEIL-->
+    <main class="accueil">
+      <div class="scie1">
+        <img src="images/scie.png" alt="Scie" width="200px" />
+      </div>
+      <h1>LE QUIZ DE L'ENFER!!</h1>
+      <h2>Q U I Z</h2>
+      <h3>CLICKEZ SUR LE BOUTON POUR COMMENCER</h3>
+      <div class="boutonCommencerQuiz">
+        <p>Commencer le quiz</p>
+      </div>
+      <div class="scie2">
+        <img src="images/scie.png" alt="Scie" width="200px" />
+      </div>
+    </main>
+
+    <!-- LE MAIN DU QUIZ-->
+    <main class="quiz">
+      <div class="lesQuestionsQuiz"></div>
+      <div class="leChoixDeReponsesQuiz"></div>
+      <div class="compteurBonnesReponses">
+        <div class="compteur"></div>
+      </div>
+    </main>
+
+    <!-- LE MAIN DE LA FIN-->
+    <main class="fin">
+      <h1>vous avez complété le quiz</h1>
+      <h4></h4>
+      <div class="scieFin">
+        <img src="images/scie.png" alt="Scie" width="200px" />
+      </div>
+      <h5></h5>
+      <div class="boutonRecommencerQuiz"><p>recommencer quiz?</p></div>
+      <a href="https://www.behance.net/alex_ydr3dc3">
+        <i class="fa-brands fa-square-behance"></i
+      ></a>
+    </main>
+
+    <!-- Chargement des scripts -->
+    <script src="js/questionsQuiz.js"></script>
+    <script src="js/quiz.js"></script>
+  </body>
+</html>

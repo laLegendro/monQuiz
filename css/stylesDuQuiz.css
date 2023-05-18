@@ -1,0 +1,674 @@
+/*****************************ANIMATIONS ************************/
+
+/*  Animation de transitions d'écrans (accueil => main => fin => accueil, etc */
+
+@keyframes opaciteEnleve {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes opaciteMontre {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/*Animation Bonne réponse*/
+@keyframes AnimationBonneReponse {
+  0% {
+    /* -webkit-filter: contrast(1), saturate(1);*/
+    translate: 0 50px; /* le translate va faire en sorte que l'image dit OUI avec mouvement*/
+    /* je ne peux pas mettre de background-color en vert, car il y a un background image... alors je vais jouer avec les filtres*/
+    filter: saturate(0);
+    scale: 100%;
+  }
+  20% {
+    translate: 0 -50px;
+  }
+  40% {
+    translate: 0 50px;
+  }
+  60% {
+    translate: 0 -50px;
+  }
+
+  80% {
+    translate: 0 50px;
+  }
+
+  100% {
+    /* -webkit-filter: contrast(2), saturate(2);*/
+    translate: 0 -50px;
+    filter: saturate(4); /*les couleurs deviennent vif*/
+    scale: 150%; /*l'image devient gros*/
+  }
+}
+
+/*Animation mauvaise réponse*/
+@keyframes AnimationMauvaiseReponse {
+  0% {
+    /* -webkit-filter: blur(0), grayscale(0);*/
+    translate: 50px; /*le translate va faire en sorte que l'image dit NON avec le mouvement*/
+    filter: grayscale(0%);
+    scale: 100%;
+  }
+  20% {
+    translate: -50px;
+  }
+  40% {
+    translate: 50px;
+  }
+  60% {
+    translate: -50px;
+  }
+
+  80% {
+    translate: 50px;
+  }
+  100% {
+    /* -webkit-filter: blur(10px), grayscale(1);*/
+    translate: -50;
+    filter: grayscale(100%); /*il devient complètement gris*/
+    scale: 50%; /*il devient petit*/
+  }
+}
+
+/*Animations changer de question*/
+/*c'est sûr qu'il y a une façon plus simple d'implementer le tout avec une seule key frame, mais j'ai essayé plusieurs plusieurs trucs et pas réussit */
+
+@keyframes animationSection1 {
+  from {
+    filter: blur(10px);
+  }
+
+  to {
+    filter: blur(0);
+  }
+}
+
+@keyframes animationSection2 {
+  from {
+    opacity: 0;
+    filter: blur(10px);
+  }
+
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+@keyframes animationSection3 {
+  from {
+    opacity: 0;
+    filter: blur(10px);
+  }
+
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+@keyframes animationSection4 {
+  from {
+    opacity: 0;
+    filter: blur(10px);
+  }
+
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+/* -------------- Animations pour la page de'accueil ---------------*/
+
+/*Animation des scies*/
+/*Animation de rotation des scies*/
+@keyframes AnimationRotation1 {
+  from {
+    rotate: 0;
+  }
+  to {
+    rotate: 360deg;
+  }
+}
+
+@keyframes AnimationRotation2 {
+  from {
+    rotate: 0;
+  }
+  to {
+    rotate: -360deg;
+  }
+}
+/*Animation déplacement des scies*/
+@keyframes AnimationDeplacementScie1 {
+  /*je ne le mets pas dans la même que l'animation de rotation car elle est infinite. je veux que le déplacement soit qu'une fois*/
+  from {
+    /*je mets la scie en dehors du vw.*/
+    translate: -20vw;
+  }
+  to {
+    /*puis je l'amène de l'autre bord.*/
+    translate: 100vw;
+  }
+}
+
+@keyframes AnimationDeplacementScie2 {
+  /*je ne le mets pas dans la même que l'animation de rotation car elle est infinite. je veux que le déplacement soit qu'une fois*/
+  from {
+    /*je mets la scie en dehors du vw.*/
+    translate: 20vw;
+  }
+  to {
+    /*puis je l'amène de l'autre bord.*/
+    translate: -100vw;
+  }
+}
+
+/*Animation des titres*/
+@keyframes animerTitre {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* la scie finale et son animation de rotation. l'animation de taille sera faite avec RAF*/
+main.fin div.scieFin {
+  animation: AnimationRotation1 1.5s infinite linear;
+  z-index: 500;
+}
+
+/*le div qui contient la scie du haut dans ma page d'accueil*/
+
+main.accueil div.scie1 {
+  position: absolute; /*absolute de son père étant main pour être placé dans le coin top left.*/
+  top: 0;
+  left: 0;
+  z-index: 500; /*une haute valeur pour que ça soit par dessus mon h1*/
+}
+
+/*le div qui contient la scie du bas dans ma page d'accueil*/
+main.accueil div.scie2 {
+  position: absolute; /*absolute de son père étant main pour être placé dans le coin bottom right.*/
+  bottom: 0;
+  right: 0;
+  z-index: 500; /*une haute valeur pour que ça soit par dessus mon h1*/
+}
+
+/*l'image de la scie dans la balise div class scie1*/
+main.accueil .scie1 {
+  /*Application de l'animation*/
+  animation: AnimationRotation1 1.5s infinite linear,
+    AnimationDeplacementScie1 1.2s linear;
+  animation-fill-mode: forwards; /*pour que les scies ne reviennent pas sur la scène*/
+}
+/*l'image de la scie dans la balise div class scie2*/
+main.accueil .scie2 {
+  /*Application de l'animation*/
+  animation: AnimationRotation2 1.5s infinite linear,
+    AnimationDeplacementScie2 1.2s linear;
+  animation-fill-mode: forwards; /*pour que les scies ne reviennent pas sur la scène*/
+}
+
+main.accueil h1 {
+  /*animation*/
+  animation: animerTitre 3s;
+}
+
+main.accueil h2 {
+  /*animation*/
+  animation: animerTitre 4s;
+}
+
+main.accueil h3 {
+  padding-bottom: 2rem; /*pas trop trop collé finalement*/
+
+  /*animation*/
+  animation: animerTitre 3s;
+}
+
+/***************************LES BOUTONS*******************************/
+.boutonCommencerQuiz {
+  width: 300px; /* sa largeur*/
+  height: 80px; /* sa hateur*/
+  background-color: white; /* sa couleur*/
+  border-radius: 20px; /*pour rendre les bordures rondes*/
+  display: flex; /*le contenu du bouton en flex*/
+  justify-content: center; /*centré*/
+  align-items: center; /*centré*/
+  cursor: url(../images/curseurChucky.png) 26 26, pointer; /*courseur 1*/
+  animation: animerTitre 4s; /*son animation*/
+  position: relative; /*la position doit être relative pour le pseudo-élément*/
+
+  transition: scale 0.5s; /*transition pour la taille*/
+}
+
+.boutonCommencerQuiz:hover {
+  scale: 110%; /*juste une mini animation sur le bouton*/
+}
+
+/* mon bouton contiendra un ::before et un ::after, car je veux me forcer à manipuler les 2, un étant texte et un étant forme*/
+.boutonCommencerQuiz::before {
+  /* le ::before sera du texte*/
+  position: absolute;
+  content: "Activez votre audio!";
+  color: white;
+  font-family: "titre";
+  top: 1; /* il sera caché*/
+  opacity: 0; /* il sera caché*/
+  font-size: 2rem;
+  transition: top 1s ease;
+}
+
+.boutonCommencerQuiz:hover::before {
+  top: -3rem; /* lorsque hover, il sera montré*/
+  opacity: 1; /* il sera caché*/
+}
+
+.boutonCommencerQuiz::after {
+  /* le after sera une forme*/
+  position: absolute; /*la position doit être absolue*/
+  content: ""; /*il faut absolument mettre un content vide pour les pseudo-éléments*/
+  top: 0%; /*positionné à la taille du bouton*/
+  right: 0%; /*positionné à la taille du bouton*/
+  bottom: 0%; /*positionné à la taille du bouton*/
+  left: 0%; /*positionné à la taille du bouton*/
+  border: 0rem solid red; /*Bordure de 0rem de la même couleur que celle du bouton*/
+  border-radius: 20px; /*pour avoir la même forme que le bouton*/
+  /*Transition sur les positions et la largeur de la bordure*/
+  transition: left 0.5s, top 0.5s, right 0.5s, bottom 0.5s, border-width 0.5s;
+}
+
+.boutonCommencerQuiz:hover::after {
+  /* avec la formule suivante, le ::after sera dévoilé*/
+  border-width: 0.2rem;
+  left: -0.5rem;
+  top: -0.5rem;
+  right: -0.5rem;
+  bottom: -0.5rem;
+}
+
+/************************Bouton ACTIVER RIRE***********************/
+/* dans une des questions il y a un bouton pour activer un rire*/
+
+.boutonRire {
+  width: 100px; /* un plus petit bouton*/
+  height: 100px; /* un plus petit bouton*/
+  background-color: white;
+
+  border-radius: 50%; /*je le veux en cercle*/
+  display: flex; /*le contenu du bouton en flex*/
+  flex-direction: column; /*en colonne car c'est un cercle*/
+  justify-content: center; /*centré*/
+  align-items: center; /*centré*/
+  cursor: url(../images/jigsawCurseur.png) 32 32, pointer; /* curseur 2*/
+  animation: animerTitre 4s; /* son animation*/
+  position: relative; /*la position doit être relative pour le pseudo-élément*/
+
+  transition: scale 0.5s; /*transition pour la taille*/
+}
+
+.boutonRire:hover {
+  scale: 110%; /*juste une mini animation sur le bouton*/
+}
+
+.boutonRire::after {
+  content: "";
+  position: absolute;
+  opacity: 0; /*au départ il ne sera pas visible*/
+
+  /*effet de transition de l'opacité*/
+  transition: opacity 1s;
+}
+
+.boutonRire:hover::after {
+  width: 120%; /*un peu plus grand que le bouton même*/
+  height: 120%; /*un peu plus grand que le bouton même*/
+  border-radius: 50%; /*un cercle comme le bouton*/
+  top: -10%; /*pour qu'il soit bien centré selon la largeur*/
+  left: -10%; /*pour qu'il soit bien centré selon la hauteur*/
+  background-color: transparent; /*je veux juste la bordure*/
+  box-shadow: 0 0 20px 10px red;
+  opacity: 1; /*il sera 100% visible*/
+}
+
+/*************************Bouton RECOMMENCER quiz ****************/
+.boutonRecommencerQuiz {
+  width: 300px;
+  height: 80px;
+  background-color: white;
+  border-radius: 20px; /*pour rendre les bordures rondes*/
+  display: flex; /*le contenu du bouton en flex*/
+  justify-content: center; /*centré*/
+  align-items: center; /*centré*/
+  cursor: url(../images/curseurChucky.png) 26 26, pointer; /*mon curseur 1*/
+  animation: animerTitre 4s;
+  position: relative; /*la position doit être relative pour le pseudo-élément*/
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  transition: scale 0.5s; /*transition pour la taille*/
+}
+
+.boutonRecommencerQuiz:hover {
+  scale: 110%; /*juste une mini animation sur le bouton*/
+}
+
+.boutonRecommencerQuiz::after {
+  position: absolute; /*la position doit être absolue*/
+  content: ""; /*il faut absolument mettre un content vide pour les pseudo-éléments*/
+  top: 0%; /*positionné à la taille du bouton*/
+  right: 0%; /*positionné à la taille du bouton*/
+  bottom: 0%; /*positionné à la taille du bouton*/
+  left: 0%; /*positionné à la taille du bouton*/
+  border: 0rem solid red; /*Bordure de 0rem de la même couleur que celle du bouton*/
+  border-radius: 20px; /*pour avoir la même forme que le bouton*/
+  /*Transition sur les positions et la largeur de la bordure*/
+  transition: left 0.5s, top 0.5s, right 0.5s, bottom 0.5s, border-width 0.5s;
+}
+
+/*je rajoute aussi un before!*/
+.boutonRecommencerQuiz::before {
+  position: absolute; /*la position doit être absolue*/
+  content: ""; /*il faut absolument mettre un content vide pour les pseudo-éléments*/
+  top: 0%; /*positionné à la taille du bouton*/
+  right: 0%; /*positionné à la taille du bouton*/
+  bottom: 0%; /*positionné à la taille du bouton*/
+  left: 0%; /*positionné à la taille du bouton*/
+  border: 0rem solid white; /*Bordure de 0rem de la même couleur que celle du bouton*/
+  border-radius: 20px; /*pour avoir la même forme que le bouton*/
+  /*Transition sur les positions et la largeur de la bordure*/
+  transition: left 0.5s, top 0.5s, right 0.5s, bottom 0.5s, border-width 0.5s;
+}
+
+.boutonRecommencerQuiz:hover::after {
+  border-width: 0.2rem; /*comme le bouton commencer le quiz*/
+  left: -0.5rem; /*comme le bouton commencer le quiz*/
+  top: -0.5rem; /*comme le bouton commencer le quiz*/
+  right: -0.5rem; /*comme le bouton commencer le quiz*/
+  bottom: -0.5rem; /*comme le bouton commencer le quiz*/
+}
+
+.boutonRecommencerQuiz:hover::before {
+  border-width: 0.2rem; /*même taille que le after*/
+  left: -1rem; /*un peu plus loin du bouton*/
+  top: -1rem; /*un peu plus loin du bouton*/
+  right: -1rem; /*un peu plus loin du bouton*/
+  bottom: -1rem; /*un peu plus loin du bouton*/
+}
+
+/**************************************************************/
+/******************** LE MAIN DU QUIZ *************************/
+/*il contient 3 divs: le premier contient le question, le deuxième les choix et le 3ème le compteur de bonnes réponses*/
+/*le div qui contient les reponses a 4 divs chacune contenant les images cible*/
+/* je suis conscient que j'aurais pu avoir utilisé la balise section, mais je m'y trouve très bien ainsi*/
+
+main.quiz {
+  display: none;
+}
+
+/* la div qui contient les questions*/
+.lesQuestionsQuiz {
+  width: 100vw;
+  height: 10vh; /*ça va prendre uniquemenet 10vh. Pas besoin de plus... */
+  display: flex; /*en flex*/
+  justify-content: center; /*centré*/
+  align-items: center; /*centré*/
+  text-align: center;
+  padding: 2rem 1rem 0 1rem;
+}
+
+/*le div qui contient le choix de réponses*/
+.leChoixDeReponsesQuiz {
+  width: 100vw;
+  height: 80vh; /*le premier et le dernier div ont chacun 10vh, donc celui-ci 80vh*/
+  display: flex; /*en flex*/
+  flex-direction: column; /*en colonne pour petit écran*/
+  flex: 1 1 auto; /*peuvent s'étirer*/
+  justify-content: space-around; /*centré*/
+  align-items: center; /*centré*/
+}
+
+/*les 4 div qui contient les images étant le choix de réponses*/
+.image1,
+.image2,
+.image3,
+.image4 {
+  /*conteneur des images pour les choix de réponse*/
+  width: 600px; /*les images mesurent 400px de largeur*/
+  height: 600px; /*les images mesurent 400px de hauteur*/
+  margin-bottom: 20px; /*espacement de 20px entre chaque div*/
+  cursor: url(../images/jigsawCurseur.png) 32 32, pointer;
+  background-repeat: no-repeat; /*je ne veux pas que l'arrière-plan se répète*/
+  background-position: center; /*centré dans l'image*/
+  clip-path: circle(18% at 50% 50%);
+
+  /*transition pour le :hover scale*/
+  transition: scale 0.5s ease-in, filter 0.5s ease-in;
+}
+
+.image1:hover,
+.image2:hover,
+.image3:hover,
+.image4:hover {
+  animation-play-state: paused; /*quand le hover se produit, l'image s'arrête*/
+  scale: 110%; /*le taille devient légèrement plus grande*/
+  filter: sepia(
+    1
+  ); /* vu que je ne peux pas utiliser les pseudo-élèments avec les clip path, je vais opter par les filtres comme élément visuel*/
+}
+
+/*la première image*/
+.leChoixDeReponsesQuiz .image1:first-of-type {
+  margin-top: 20px; /*le premier div aura un margin de 20px*/
+}
+
+/*la dernière image*/
+.leChoixDeReponsesQuiz .image1:last-of-type {
+  margin-bottom: none; /*le dernier div n'aura pas de margin bottom*/
+}
+
+/******************* ANIMATION DES IMAGES ******************/
+
+@keyframes animationImage1 {
+  /*animation de gauche à droite*/
+  from {
+    translate: -10vw;
+  }
+  to {
+    translate: 10vw;
+  }
+}
+
+@keyframes animationImage2 {
+  /*animation de droite à gauche*/
+  from {
+    translate: 10vw;
+  }
+  to {
+    translate: -10vw;
+  }
+}
+
+.image1,
+.image3 {
+  /*application des animations pour la première et troisième image*/
+  animation: animationImage1 15s linear infinite alternate;
+}
+
+.image2,
+.image4 {
+  /*application des animations pour la deuxième et dernière image*/
+  animation: animationImage2 15s linear infinite alternate;
+}
+
+/*la div contenant le compteur des bonnes réponses*/
+.compteurBonnesReponses {
+  padding-top: 20px;
+  width: 100vw;
+  height: 10vh; /*10 vh pour le dernier div. pas besoin de plus*/
+  display: flex; /*je le veux en flex*/
+  flex-direction: column; /*en colonne*/
+  justify-content: center; /*centré*/
+  align-items: center; /*centré*/
+  padding-bottom: 2rem; /* car en petit format, le h5 est trop collé au bas de l'écran*/
+}
+
+/*le main final qui contiendra la page finale*/
+main.fin {
+  display: none; /*il ne sera pas montré tout de suite*/
+  text-align: center;
+  justify-content: space-around;
+  align-items: center;
+}
+
+i {
+  /* petite animation sur le i qui contient mon behance*/
+  animation: animationImage1 15s linear infinite alternate;
+  cursor: url(../images/jigsawCurseur.png) 32 32, pointer;
+}
+
+/***************************************************************/
+/***************************************************************/
+/**************** ADAPTATION AUX RESOLUTIONS *******************/
+
+/*****************************************************************/
+/*****************************MOYEN ÉCRAN*************************/
+@media screen and (min-width: 576px) {
+  main {
+    /*je change l'arrière plan*/
+    background-image: url(../images/ArrierePlanMoyenEcran.jpg);
+    background-repeat: no-repeat;
+    background-position: bottom left;
+  }
+
+  .lesQuestionsQuiz {
+    height: 5vh; /* je change la hauteur*/
+  }
+
+  .leChoixDeReponsesQuiz {
+    flex-direction: row; /*je mets le flex en row*/
+    flex-wrap: wrap; /*et en wrap*/
+    height: 90vh; /* je change la hauteur*/
+  }
+
+  .compteurBonnesReponses {
+    height: 5vh; /* je change la hauteur*/
+  }
+
+  .image1,
+  .image2,
+  .image3,
+  .image4 {
+    /*je change les tailles des images*/
+    width: 200px;
+    height: 200px;
+    clip-path: circle(45% at 50% 50%);
+  }
+
+  /***************Nouvelles animations: du haut vers le bas et viceversa*/
+  @keyframes animationImage1MoyenEcran {
+    /*animation du bas vers le haut*/
+    from {
+      translate: 0 -10vh;
+    }
+    to {
+      translate: 0 10vh;
+    }
+  }
+
+  @keyframes animationImage2MoyenEcran {
+    /*animation du haut vers le bas*/
+    from {
+      translate: 0 10vh;
+    }
+    to {
+      translate: 0 -10vh;
+    }
+  }
+  .image1,
+  .image3 {
+    /*application des animations pour la première et troisième image*/
+    animation: animationImage1MoyenEcran 15s linear infinite alternate;
+    padding-right: 4rem;
+  }
+
+  .image2,
+  .image4 {
+    /*application des animations pour la deuxième et dernière image*/
+    animation: animationImage2MoyenEcran 15s linear infinite alternate;
+    padding-left: 4rem;
+  }
+
+  h4 {
+    font-size: 3rem; /*j'agrandis les titres*/
+  }
+
+  h5 {
+    font-size: 2rem; /*j'agrandis les titres*/
+  }
+}
+
+/*************************POUR DES RAISONS ESTHETIQUES J'ENÈVE LE WRAP À PARTIR DE 600PX ***********/
+@media screen and (min-width: 600px) {
+  .leChoixDeReponsesQuiz {
+    flex-wrap: nowrap; /*j'enlève le wrap*/
+  }
+}
+
+/*****************************************************************/
+/******************************GRAND ÉCRAN***********************/
+@media screen and (min-width: 992px) {
+  main {
+    /*je change l'arrière plan*/
+    background-image: url(../images/ArrierePlanGrandEcran.jpg);
+    background-repeat: no-repeat;
+    background-position: bottom;
+  }
+
+  /*je rends le déplacement plus long pour bien voir les scies*/
+  main.accueil .scie1 {
+    /*Application de l'animation*/
+    animation: AnimationRotation1 1.5s infinite linear,
+      AnimationDeplacementScie1 2s linear;
+    animation-fill-mode: forwards; /*pour que les scies ne reviennent pas sur la scène*/
+  }
+  /*je rends le déplacement plus long pour bien voir les scies*/
+  main.accueil .scie2 {
+    /*Application de l'animation*/
+    animation: AnimationRotation2 1.5s infinite linear,
+      AnimationDeplacementScie2 2s linear;
+    animation-fill-mode: forwards; /*pour que les scies ne reviennent pas sur la scène*/
+  }
+
+  .image1,
+  .image2,
+  .image3,
+  .image4 {
+    /*je rechange la taille des images*/
+    width: 250px;
+    height: 250px;
+    clip-path: circle(50% at 50% 50%);
+  }
+  h4 {
+    font-size: 4rem; /*j'agrandis les titres*/
+  }
+  h5 {
+    font-size: 3.5rem; /*j'agrandis les titres*/
+  }
+  i {
+    padding-top: 1rem; /*j'agrandis les titres*/
+  }
+}
